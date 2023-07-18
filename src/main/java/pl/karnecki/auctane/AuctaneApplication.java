@@ -20,6 +20,4 @@ public class AuctaneApplication {
         final Scanner scanner = new Scanner(System.in);
         appRunner.run(scanner);
     }
-
-
 }
