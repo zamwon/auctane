@@ -27,6 +27,7 @@ public class AppRunner {
                 """);
 
             int option = scanner.nextInt();
+            scanner.nextLine();
             switch (option) {
                 case 1 -> accumulate(scanner);
                 case 2 -> getTotal();
@@ -52,9 +53,12 @@ public class AppRunner {
 
     private void accumulate(final Scanner scanner) {
         logMessage("Enter one or more values:");
-        String input = scanner.nextLine();
-        int[] values = StringToIntArrayConverter.convert(input);
+        int[] values = convert(scanner.nextLine());
         accumulator.accumulate(values);
+    }
+
+    private static int[] convert(final String input) {
+        return StringToIntArrayConverter.convert(input);
     }
 
     private void logMessage(String msg) {

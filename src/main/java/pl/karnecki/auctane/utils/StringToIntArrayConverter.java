@@ -9,7 +9,7 @@ public class StringToIntArrayConverter {
             try {
                 result[i] = Integer.parseInt(tokens[i]);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid value: " + tokens[i]);
+                throw new RuntimeException("Invalid value: " + tokens[i]);
             }
         }
 
