@@ -1,6 +1,7 @@
 package pl.karnecki.auctane;
 
 import lombok.extern.slf4j.Slf4j;
+import pl.karnecki.auctane.accumulator.Accumulator;
 import pl.karnecki.auctane.exceptions.NoSuchOptionException;
 
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package pl.karnecki.auctane;
+package pl.karnecki.auctane.accumulator;
 
 public class AdditionAccumulatorImpl implements Accumulator {
     private int total;
