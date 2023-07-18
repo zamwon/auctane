@@ -1,9 +1,11 @@
 package pl.karnecki.auctane;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.karnecki.auctane.utils.StringToIntArrayConverter;
+import pl.karnecki.auctane.exceptions.NoSuchOptionException;
 
 import java.util.Scanner;
+
+import static pl.karnecki.auctane.utils.StringToIntArrayConverter.convert;
 
 @Slf4j
 public class AppRunner {
@@ -33,22 +35,9 @@ public class AppRunner {
                 case 2 -> getTotal();
                 case 3 -> reset();
                 case 4 -> exit();
-                default -> throw new IllegalArgumentException();
+                default -> throw new NoSuchOptionException(String.valueOf(option));
             }
         }
-    }
-
-    private static void exit() {
-        System.exit(0);
-    }
-
-    private void reset() {
-        accumulator.reset();
-        logMessage("Value after reset: %d".formatted(accumulator.getTotal()));
-    }
-
-    private void getTotal() {
-        logMessage("Total = %d".formatted(accumulator.getTotal()));
     }
 
     private void accumulate(final Scanner scanner) {
@@ -57,8 +46,17 @@ public class AppRunner {
         accumulator.accumulate(values);
     }
 
-    private static int[] convert(final String input) {
-        return StringToIntArrayConverter.convert(input);
+    private void getTotal() {
+        logMessage("Total = %d".formatted(accumulator.getTotal()));
+    }
+
+    private void reset() {
+        accumulator.reset();
+        logMessage("Value after reset: %d".formatted(accumulator.getTotal()));
+    }
+
+    private void exit() {
+        System.exit(0);
     }
 
     private void logMessage(String msg) {
