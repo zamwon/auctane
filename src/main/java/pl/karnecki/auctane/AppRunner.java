@@ -27,11 +27,11 @@ public class AppRunner {
                 4. Exit
                 """);
 
-            getInput(scanner);
+            getPrompt(scanner);
         }
     }
 
-    private void getInput(final Scanner scanner) {
+    private void getPrompt(final Scanner scanner) {
         int option = scanner.nextInt();
         scanner.nextLine();
         switch (option) {
