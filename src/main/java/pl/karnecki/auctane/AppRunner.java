@@ -12,7 +12,6 @@ public class AppRunner {
 
     private final Accumulator accumulator;
 
-
     public AppRunner(final Accumulator accumulator) {
         this.accumulator = accumulator;
     }
