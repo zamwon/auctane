@@ -27,15 +27,19 @@ public class AppRunner {
                 4. Exit
                 """);
 
-            int option = scanner.nextInt();
-            scanner.nextLine();
-            switch (option) {
-                case 1 -> accumulate(scanner);
-                case 2 -> getTotal();
-                case 3 -> reset();
-                case 4 -> exit();
-                default -> throw new NoSuchOptionException(String.valueOf(option));
-            }
+            getInput(scanner);
+        }
+    }
+
+    private void getInput(final Scanner scanner) {
+        int option = scanner.nextInt();
+        scanner.nextLine();
+        switch (option) {
+            case 1 -> accumulate(scanner);
+            case 2 -> getTotal();
+            case 3 -> reset();
+            case 4 -> exit();
+            default -> throw new NoSuchOptionException(String.valueOf(option));
         }
     }
 
