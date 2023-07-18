@@ -1,5 +1,7 @@
 package pl.karnecki.auctane.utils;
 
+import pl.karnecki.auctane.exceptions.InvalidInputException;
+
 public class StringToIntArrayConverter {
     public static int[] convert(String input) {
         String[] tokens = input.split("[,\\s]+");
@@ -9,7 +11,7 @@ public class StringToIntArrayConverter {
             try {
                 result[i] = Integer.parseInt(tokens[i]);
             } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid value: " + tokens[i]);
+                throw new InvalidInputException("Invalid value: " + tokens[i]);
             }
         }
 
