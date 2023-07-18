@@ -1,5 +1,8 @@
 package pl.karnecki.auctane.accumulator;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AdditionAccumulatorImpl implements Accumulator {
     private int total;
 

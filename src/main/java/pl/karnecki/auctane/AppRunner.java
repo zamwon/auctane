@@ -1,6 +1,7 @@
 package pl.karnecki.auctane;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import pl.karnecki.auctane.accumulator.Accumulator;
 import pl.karnecki.auctane.exceptions.NoSuchOptionException;
 
@@ -9,6 +10,7 @@ import java.util.Scanner;
 import static pl.karnecki.auctane.utils.StringToIntArrayConverter.convert;
 
 @Slf4j
+@Component
 public class AppRunner {
 
     private final Accumulator accumulator;
