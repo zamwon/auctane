@@ -23,7 +23,7 @@ class AdditionAccumulatorTest {
 
     @ParameterizedTest
     @MethodSource("provideTestCases")
-    void testAccumulate(int expectedSum, int... values) {
+    void shouldAccumulate(int expectedSum, int... values) {
 
         //when
         int sum = accumulator.accumulate(values);
@@ -33,7 +33,7 @@ class AdditionAccumulatorTest {
     }
 
     @Test
-    void testGetTotal() {
+    void shouldGetTotal() {
 
         //given
         var prompt1 = new int[]{1,2,3};
@@ -49,7 +49,7 @@ class AdditionAccumulatorTest {
     }
 
     @Test
-    void testReset() {
+    void shouldResetAccumulator() {
 
         //given
         var prompt1 = new int[]{1,2,3};
