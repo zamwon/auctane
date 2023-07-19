@@ -1,7 +1,6 @@
 package pl.karnecki.auctane;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import pl.karnecki.auctane.accumulator.Accumulator;
 
 import java.util.Scanner;
@@ -9,7 +8,6 @@ import java.util.Scanner;
 import static pl.karnecki.auctane.utils.StringToIntArrayConverter.convert;
 
 @Slf4j
-@Component
 public class AppRunner {
 
     public static final String PROMPT_MENU = """
