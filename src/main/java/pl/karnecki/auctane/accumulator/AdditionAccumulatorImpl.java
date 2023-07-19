@@ -18,7 +18,7 @@ public class AdditionAccumulatorImpl implements Accumulator {
 
         for (int value : values) {
             if (isMaxIntReached(sum, value) || isMinIntReached(sum, value)) {
-                consoleLogger.logWarnMessage("Overflow occurred - data might be lost");
+                consoleLogger.logWarnMessage("Overflow occurred - data might be lost! Accumulation cancelled");
                 return sum;
             }
             sum += value;
