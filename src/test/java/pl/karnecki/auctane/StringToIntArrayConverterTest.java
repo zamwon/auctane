@@ -15,8 +15,8 @@ class StringToIntArrayConverterTest {
         "1 2 3 4 5",
         "1,2,3,4,5"})
     void convertValidInput(String input) {
-        int[] expected = {1, 2, 3, 4, 5};
-        int[] result = StringToIntArrayConverter.convert(input);
+        var expected = new int[]{1, 2, 3, 4, 5};
+        var result = StringToIntArrayConverter.convert(input);
         assertArrayEquals(expected, result);
     }
 
