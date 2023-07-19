@@ -2,6 +2,8 @@ package pl.karnecki.auctane.accumulator;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
 public class AdditionAccumulatorImpl implements Accumulator {
     private int total;
@@ -12,10 +14,7 @@ public class AdditionAccumulatorImpl implements Accumulator {
 
     @Override
     public int accumulate(int... values) {
-        int sum = 0;
-        for (int value : values) {
-            sum += value;
-        }
+        int sum = Arrays.stream(values).sum();
         total += sum;
         return sum;
     }
