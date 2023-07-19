@@ -12,6 +12,14 @@ public class AdditionAccumulatorImpl implements Accumulator {
         this.total = 0;
     }
 
+    private static boolean isMinIntReached(final int sum, final int value) {
+        return value < 0 && sum < Integer.MIN_VALUE - value;
+    }
+
+    private static boolean isMaxIntReached(final int sum, final int value) {
+        return value > 0 && sum > Integer.MAX_VALUE - value;
+    }
+
     @Override
     public int accumulate(int... values) {
         var sum = 0;
@@ -25,14 +33,6 @@ public class AdditionAccumulatorImpl implements Accumulator {
         }
         total += sum;
         return sum;
-    }
-
-    private static boolean isMinIntReached(final int sum, final int value) {
-        return value < 0 && sum < Integer.MIN_VALUE - value;
-    }
-
-    private static boolean isMaxIntReached(final int sum, final int value) {
-        return value > 0 && sum > Integer.MAX_VALUE - value;
     }
 
     @Override
