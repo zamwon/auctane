@@ -2,8 +2,13 @@ package pl.karnecki.auctane;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import pl.karnecki.auctane.accumulator.Accumulator;
 import pl.karnecki.auctane.accumulator.AdditionAccumulatorImpl;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,31 +21,53 @@ class AdditionAccumulatorTest {
         accumulator = new AdditionAccumulatorImpl();
     }
 
-    @Test
-    void testAccumulate() {
-        int firstSum = accumulator.accumulate(1, 2, 3);
-        assertEquals(6, firstSum);
+    @ParameterizedTest
+    @MethodSource("provideTestCases")
+    void testAccumulate(int expectedSum, int... values) {
 
-        int secondSum = accumulator.accumulate(4);
-        assertEquals(4, secondSum);
+        //when
+        int sum = accumulator.accumulate(values);
+
+        //then
+        assertEquals(expectedSum, sum);
     }
 
     @Test
     void testGetTotal() {
-        accumulator.accumulate(1, 2, 3);
-        int total = accumulator.getTotal();
-        assertEquals(6, total);
 
-        accumulator.accumulate(4);
-        total = accumulator.getTotal();
+        //given
+        var prompt1 = new int[]{1,2,3};
+        var prompt2 = new int[]{4};
+
+        //when
+        accumulator.accumulate(prompt1);
+        accumulator.accumulate(prompt2);
+        int total = accumulator.getTotal();
+
+        //then
         assertEquals(10, total);
     }
 
     @Test
     void testReset() {
-        accumulator.accumulate(1, 2, 3);
+
+        //given
+        var prompt1 = new int[]{1,2,3};
+        accumulator.accumulate(prompt1);
+
+        //when
         accumulator.reset();
         int total = accumulator.getTotal();
+
+        //then
         assertEquals(0, total);
+    }
+
+    private static Stream<Arguments> provideTestCases() {
+        return Stream.of(
+            Arguments.of(6, 1, 2, 3),
+            Arguments.of(4, 4),
+            Arguments.of(10, 1, 2, 3, 4)
+        );
     }
 }
