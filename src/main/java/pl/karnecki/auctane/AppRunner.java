@@ -13,6 +13,13 @@ import static pl.karnecki.auctane.utils.StringToIntArrayConverter.convert;
 @Component
 public class AppRunner {
 
+    public static final String PROMPT_MENU = """
+        Select an option:
+        1. Accumulate:
+        2. Get total
+        3. Reset
+        4. Exit
+        """;
     private final Accumulator accumulator;
 
     public AppRunner(final Accumulator accumulator) {
@@ -22,20 +29,13 @@ public class AppRunner {
     public void run(final Scanner scanner) {
         while (true) {
 
-            logMessage("""
-                Select an option:
-                1. Accumulate:
-                2. Get total
-                3. Reset
-                4. Exit
-                """);
-
+            logMessage(PROMPT_MENU);
             getPrompt(scanner);
         }
     }
 
     private void getPrompt(final Scanner scanner) {
-        int option = scanner.nextInt();
+        var option = scanner.nextInt();
         scanner.nextLine();
         switch (option) {
             case 1 -> accumulate(scanner);
@@ -48,7 +48,7 @@ public class AppRunner {
 
     private void accumulate(final Scanner scanner) {
         logMessage("Enter one or more values:");
-        int[] values = convert(scanner.nextLine());
+        var values = convert(scanner.nextLine());
         accumulator.accumulate(values);
     }
 
