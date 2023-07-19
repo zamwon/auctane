@@ -14,7 +14,7 @@ public class AdditionAccumulatorImpl implements Accumulator {
 
     @Override
     public int accumulate(int... values) {
-        int sum = Arrays.stream(values).sum();
+        var sum = Arrays.stream(values).sum();
         total += sum;
         return sum;
     }
