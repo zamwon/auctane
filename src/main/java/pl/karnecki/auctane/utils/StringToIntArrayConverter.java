@@ -1,20 +1,25 @@
 package pl.karnecki.auctane.utils;
 
-import pl.karnecki.auctane.exceptions.InvalidInputException;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+
+@Slf4j
 public class StringToIntArrayConverter {
     public static int[] convert(String input) {
-        String[] tokens = input.split("[,\\s]+");
-        int[] result = new int[tokens.length];
+        return Arrays.stream(input.split("[,\\s]+"))
+            .mapToInt(value -> {
+                try {
+                    return Integer.parseInt(value);
+                } catch (IllegalArgumentException e) {
+                    logWarnMessage(value);
+                    throw e;
+                }
+            })
+            .toArray();
+    }
 
-        for (int i = 0; i < tokens.length; i++) {
-            try {
-                result[i] = Integer.parseInt(tokens[i]);
-            } catch (NumberFormatException e) {
-                throw new InvalidInputException("Invalid value: " + tokens[i]);
-            }
-        }
-
-        return result;
+    private static void logWarnMessage(final String value) {
+        log.warn("Cannot cast " + value + " to integer");
     }
 }
