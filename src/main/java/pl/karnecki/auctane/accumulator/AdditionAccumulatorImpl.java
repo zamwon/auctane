@@ -16,24 +16,12 @@ public class AdditionAccumulatorImpl implements Accumulator {
         this.total = BigInteger.ZERO;
     }
 
-    private static boolean isMaxIntReached(BigInteger sum, int value) {
-        return value > 0 && (sum.add(BigInteger.valueOf(value)).compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) >= 0);
-    }
-
-    private static boolean isMinIntReached(BigInteger sum, int value) {
-        return value < 0 && (sum.add(BigInteger.valueOf(value)).compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) <= 0);
-    }
-
     @Override
     public int accumulate(int... values) {
         BigInteger sum = BigInteger.ZERO;
-        for (int i = 0; i < values.length; i++) {
+        for (int value : values) {
 
-            if (isMaxIntReached(sum, values[i]) || isMinIntReached(sum, values[i])) {
-                BigInteger[] bigIntValues = new BigInteger[values.length];
-                bigIntValues[i] = BigInteger.valueOf(values[i]);
-            }
-            sum = sum.add(BigInteger.valueOf(values[i]));
+            sum = sum.add(BigInteger.valueOf(value));
         }
         total = total.add(sum);
         consoleLogger.logMessage(RESULT + sum);
@@ -51,10 +39,6 @@ public class AdditionAccumulatorImpl implements Accumulator {
         total = BigInteger.ZERO;
     }
 
-    private boolean isUnderFlow() {
-        consoleLogger.logWarnMessage(UNDERFLOW);
-        return total.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0;
-    }
 
     public BigInteger getTotal(BigInteger total) {
         return total;
@@ -67,14 +51,19 @@ public class AdditionAccumulatorImpl implements Accumulator {
     }
 
     private boolean isOverflow() {
-        consoleLogger.logWarnMessage(OVERFLOW);
         return total.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0;
+    }
+
+    private boolean isUnderFlow() {
+        return total.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0;
     }
 
     private int returnResult() {
         if (isUnderFlow()) {
+            consoleLogger.logWarnMessage(UNDERFLOW);
             return Integer.MIN_VALUE;
         } else if (isOverflow()) {
+            consoleLogger.logWarnMessage(OVERFLOW);
             return Integer.MAX_VALUE;
         } else return total.intValueExact();
     }
