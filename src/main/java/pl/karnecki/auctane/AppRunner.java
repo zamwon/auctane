@@ -23,7 +23,7 @@ public class AppRunner {
     public static final String PROVIDE_NUMBER = "Please provide number - input is incorrect";
     public static final String SELECT_OPTION = "Select option from 1 to 4!";
     private static final Integer LIMIT = 10000;
-    public static final String ENTER_ONE_OR_MORE_VALUES = "Enter one or more values: ";
+    public static final String ENTER_ONE_OR_MORE_NUMBERS = "Enter one or more numbers: ";
     public static final String INCORRECT_VALUE = " Incorrect value: ";
     private final Accumulator accumulator;
     private final Scanner scanner;
@@ -59,7 +59,7 @@ public class AppRunner {
     }
 
     private void accumulate() {
-        consoleLogger.logMessage(ENTER_ONE_OR_MORE_VALUES);
+        consoleLogger.logMessage(ENTER_ONE_OR_MORE_NUMBERS);
         var values = convert(scanner.nextLine());
         accumulator.accumulate(values);
     }
