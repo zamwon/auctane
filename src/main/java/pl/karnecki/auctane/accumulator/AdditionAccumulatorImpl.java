@@ -47,7 +47,8 @@ public class AdditionAccumulatorImpl implements Accumulator {
     public Object evaluateTotal() {
         if (isOverflow() || isUnderFlow()) {
             return getTotal(total);
-        } else return getTotal();
+        }
+        return getTotal();
     }
 
     private boolean isOverflow() {
@@ -62,9 +63,13 @@ public class AdditionAccumulatorImpl implements Accumulator {
         if (isUnderFlow()) {
             consoleLogger.logWarnMessage(UNDERFLOW);
             return Integer.MIN_VALUE;
-        } else if (isOverflow()) {
+        }
+
+        if (isOverflow()) {
             consoleLogger.logWarnMessage(OVERFLOW);
             return Integer.MAX_VALUE;
-        } else return total.intValueExact();
+        }
+
+        return total.intValueExact();
     }
 }
