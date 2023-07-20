@@ -1,7 +1,7 @@
 package pl.karnecki.auctane;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.karnecki.auctane.accumulator.Accumulator;
+import pl.karnecki.auctane.accumulator.AdditionAccumulatorImpl;
 import pl.karnecki.auctane.utils.ConsoleLogger;
 
 import java.util.Scanner;
@@ -25,12 +25,12 @@ public class AppRunner {
     private static final Integer LIMIT = 10000;
     public static final String ENTER_ONE_OR_MORE_NUMBERS = "Enter one or more numbers: ";
     public static final String INCORRECT_VALUE = " Incorrect value: ";
-    private final Accumulator accumulator;
+    private final AdditionAccumulatorImpl accumulator;
     private final Scanner scanner;
     private final ConsoleLogger consoleLogger;
 
-    public AppRunner(final Accumulator accumulator) {
-        this.accumulator = accumulator;
+    public AppRunner() {
+        this.accumulator = new AdditionAccumulatorImpl();
         this.scanner = new Scanner(System.in);
         this.consoleLogger = new ConsoleLogger();
     }
@@ -65,7 +65,7 @@ public class AppRunner {
     }
 
     private void getTotal() {
-        consoleLogger.logMessage(TOTAL, accumulator.getTotal());
+        consoleLogger.logMessage(TOTAL, accumulator.evaluateTotal());
     }
 
     private void reset() {
