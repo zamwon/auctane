@@ -2,24 +2,29 @@ package pl.karnecki.auctane.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 @Slf4j
 public class StringToIntArrayConverter {
-    public static int[] convert(String input) {
-        return Arrays.stream(input.split("[,;\\s]+"))
-            .mapToInt(value -> {
+    public static Object convert(final String input) {
+        var elements = input.split("[,;\\s]+");
+        var isAllIntegers = Arrays.stream(elements)
+            .allMatch(value -> {
                 try {
-                    return Integer.parseInt(value);
-                } catch (IllegalArgumentException e) {
-                    logWarnMessage(value);
-                    throw e;
+                    Integer.parseInt(value);
+                    return true;
+                } catch (NumberFormatException e) {
+                    return false;
                 }
-            })
-            .toArray();
-    }
+            });
 
-    private static void logWarnMessage(final String value) {
-        log.warn("Cannot cast " + value + " to integer");
+        if (isAllIntegers) {
+            return Arrays.stream(elements)
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        } return Arrays.stream(elements)
+                .map(BigInteger::new)
+                .toArray(BigInteger[]::new);
     }
 }
