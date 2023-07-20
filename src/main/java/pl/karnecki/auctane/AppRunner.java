@@ -20,7 +20,7 @@ public class AppRunner {
         """;
     public static final String TOTAL = "Total = ";
     public static final String VALUE_AFTER_RESET = "Value after reset: ";
-    public static final String PROVIDE_NUMBER = "Please provide number - input is incorrect";
+    public static final String PROVIDE_NUMBER = "Please provide number - input is incorrect. ";
     public static final String SELECT_OPTION = "Select option from 1 to 4!";
     private static final Integer LIMIT = 10000;
     public static final String ENTER_ONE_OR_MORE_NUMBERS = "Enter one or more numbers: ";
