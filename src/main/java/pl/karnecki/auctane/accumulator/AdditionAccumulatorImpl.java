@@ -18,7 +18,7 @@ public class AdditionAccumulatorImpl implements Accumulator {
 
     @Override
     public int accumulate(int... values) {
-        BigInteger sum = BigInteger.ZERO;
+        var sum = BigInteger.ZERO;
         for (int value : values) {
 
             sum = sum.add(BigInteger.valueOf(value));
@@ -26,7 +26,7 @@ public class AdditionAccumulatorImpl implements Accumulator {
         total = total.add(sum);
         consoleLogger.logMessage(RESULT + sum);
 
-        return returnResult();
+        return total.intValueExact();
     }
 
     @Override
@@ -38,7 +38,6 @@ public class AdditionAccumulatorImpl implements Accumulator {
     public void reset() {
         total = BigInteger.ZERO;
     }
-
 
     public BigInteger getTotal(BigInteger total) {
         return total;
@@ -59,17 +58,14 @@ public class AdditionAccumulatorImpl implements Accumulator {
         return total.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0;
     }
 
-    private int returnResult() {
-        if (isUnderFlow()) {
-            consoleLogger.logWarnMessage(UNDERFLOW);
-            return Integer.MIN_VALUE;
-        }
+    public BigInteger accumulate(final BigInteger[] values) {
+        var sum = BigInteger.ZERO;
+        for (BigInteger value : values) {
 
-        if (isOverflow()) {
-            consoleLogger.logWarnMessage(OVERFLOW);
-            return Integer.MAX_VALUE;
+            sum = sum.add(value);
         }
-
-        return total.intValueExact();
+        total = total.add(sum);
+        consoleLogger.logMessage(RESULT + sum);
+        return total;
     }
 }

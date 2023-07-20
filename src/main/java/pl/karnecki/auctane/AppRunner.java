@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import pl.karnecki.auctane.accumulator.AdditionAccumulatorImpl;
 import pl.karnecki.auctane.utils.ConsoleLogger;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 import static pl.karnecki.auctane.utils.StringToIntArrayConverter.convert;
@@ -61,7 +62,12 @@ public class AppRunner {
     private void accumulate() {
         consoleLogger.logMessage(ENTER_ONE_OR_MORE_NUMBERS);
         var values = convert(scanner.nextLine());
-        accumulator.accumulate(values);
+        if (values instanceof BigInteger[]) {
+            accumulator.accumulate((BigInteger[]) values);
+        }
+        if (values instanceof int[]) {
+            accumulator.accumulate((int[]) values);
+        }
     }
 
     private void getTotal() {
