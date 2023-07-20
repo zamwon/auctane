@@ -32,6 +32,7 @@ public class AdditionAccumulatorImpl implements Accumulator {
             sum += value;
         }
         total += sum;
+        consoleLogger.logMessage("Accumulate result = " + sum);
         return sum;
     }
 
